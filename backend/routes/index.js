@@ -5,6 +5,7 @@ const express = require('express')
 const router = express.Router()
 
 
+const deleteLikedProductController = require("../controller/user/deleteLikedProductController");
 
 const authToken = require('../middleware/authToken')
 
@@ -36,6 +37,10 @@ const likedProductController = require('../controller/user/likedProductControlle
 const countLikedProduct = require('../controller/user/countLikedProduct')
 const likedProductView = require('../controller/user/likedProductView')
 
+const addDocumentController = require('../controller/admin/addDocument');
+const removeDocumentController = require('../controller/admin/removeDocument');
+const getDocumentsController = require('../controller/user/getDocuments');
+
 
 
 router.post("/signup",UserSignUpController)
@@ -43,10 +48,19 @@ router.post("/signin", userSignInController)
 router.get("/user-details", authToken, userDetailsController)
 router.get("/userLogout", userLogout)
 
+// Admin Routes
+router.post("/admin/add-document", authToken, addDocumentController);
+router.post("/admin/remove-document", authToken, removeDocumentController);
+
+// User Routes
+router.get("/user/documents", authToken, getDocumentsController);
+
 //admin panel 
 
 router.get("/all-users",authToken,allUsers)
 router.post("/update-user",authToken, updateUser) //goto the front end folder also go to the changeuserrole in componenet
+
+router.delete("/liked-product/delete", authToken, deleteLikedProductController);
 
 //upload product
 router.post("/upload-product",authToken, uploadProductController)

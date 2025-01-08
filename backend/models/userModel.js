@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Update User Schema to Include Documents
 const userSchema = new mongoose.Schema(
   {
     name: String,
@@ -14,17 +15,23 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'GENERAL',
     },
-    location: String, // Add this field
-    hostel: String,    // Add this field
+    documents: [
+      {
+        link: { type: String, required: true },
+        date: { type: Date, default: Date.now },
+        price: { type: Number, required: true },
+        location: { type: String, required: true },
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-const userModel = mongoose.model('User', userSchema); // Updated model name
+const userModel = mongoose.model('User', userSchema);
+module.exports = userModel;
 
-module.exports = userModel
 
 
 

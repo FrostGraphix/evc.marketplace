@@ -1,5 +1,5 @@
-const Stripe = require('stripe')
+const Paystack = require('paystack')
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY)
+const paystack = Paystack(process.env.REACT_APP_PAYSTACK_SECRET_KEY)
 
-module.exports = stripe
+module.exports = paystack
